@@ -6,6 +6,7 @@ import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"log"
+	"time"
 )
 
 
@@ -14,7 +15,7 @@ var db *gorm.DB
 type Model struct {
 	ID int `gorm:"primary_key" json:"id"`
 	CreatedOn int `json:"created_on"`
-	ModifyOn int `json:"modified_on"`
+	ModifiedOn int `json:"modified_on"`
 }
 
 func init()  {
@@ -54,4 +55,16 @@ func init()  {
 
 func CloseDB() {
 	defer db.Close()
+}
+
+
+func (mode *Model) BeforeCreate(scope *gorm.Scope) error{
+	scope.SetColumn("CreatedOn",time.Now().Unix())
+	scope.SetColumn("ModifiedOn",time.Now().Unix())
+	return nil
+}
+
+func (mode *Model) BeforeUpdate(scope *gorm.Scope) error{
+	scope.SetColumn("ModifiedOn",time.Now().Unix())
+	return nil
 }
