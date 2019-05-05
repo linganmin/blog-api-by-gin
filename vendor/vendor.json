@@ -9,6 +9,12 @@
 			"revisionTime": "2018-11-05T09:08:03Z"
 		},
 		{
+			"checksumSHA1": "pcrgKHC4aT5B6vmwielu/xT0N8k=",
+			"path": "github.com/Unknwon/com",
+			"revision": "0fed4efef7553eed2cd04624befccacda78bb8e2",
+			"revisionTime": "2019-03-21T03:55:13Z"
+		},
+		{
 			"checksumSHA1": "rf4401a4BPVpHkdJ1Dfzx3onamo=",
 			"path": "github.com/codegangsta/envy/lib",
 			"revision": "4b78388c8ce4fa412440ca4eaa654e2fdd752e49",
