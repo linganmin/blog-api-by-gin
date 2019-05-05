@@ -4,15 +4,17 @@ import (
 	"fmt"
 	"ginhello/packages/setting"
 	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"log"
 )
+
 
 var db *gorm.DB
 
 type Model struct {
 	ID int `gorm:"primary_key" json:"id"`
-	CreatedOn `json:"created_on"`
-	ModifyOn `json:"modified_on"`
+	CreatedOn int `json:"created_on"`
+	ModifyOn int `json:"modified_on"`
 }
 
 func init()  {
@@ -28,20 +30,19 @@ func init()  {
 	}
 
 	dbType = sec.Key("DRIVER").String()
-	dbName= sec.Key("USERNAME").String()
+	username= sec.Key("USERNAME").String()
+	dbName= sec.Key("DB_NAME").String()
 	password= sec.Key("PASSWORD").String()
 	host= sec.Key("HOST").String()
 	port= sec.Key("PORT").String()
 	tablePrefix = sec.Key("TABLE_PREFIX").String()
 
 
-	db,err := gorm.Open(dbType,fmt.Sprintf("&s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=True&loc=Local",username,password,host,port,dbName))
+	db,err = gorm.Open(dbType,fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=True&loc=Local",username,password,host,port,dbName))
 
 	if err != nil {
-
 		log.Println(err)
 	}
-
 	gorm.DefaultTableNameHandler = func(db *gorm.DB, defaultTableName string) string {
 		return tablePrefix + defaultTableName
 	}

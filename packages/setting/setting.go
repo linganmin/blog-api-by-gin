@@ -7,7 +7,7 @@ import (
 )
 
 var (
-	Cfg *init.File
+	Cfg *ini.File
 
 	AppEnv       string
 	RunMode      string

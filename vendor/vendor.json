@@ -15,6 +15,12 @@
 			"revisionTime": "2019-03-21T03:55:13Z"
 		},
 		{
+			"checksumSHA1": "+mWpTLP462ZpvSOfcRcnPdBlaxM=",
+			"path": "github.com/astaxie/beego/validation",
+			"revision": "1b6edafc96ad27b6515fafeccd7339dda3e997b1",
+			"revisionTime": "2018-11-30T13:54:26Z"
+		},
+		{
 			"checksumSHA1": "rf4401a4BPVpHkdJ1Dfzx3onamo=",
 			"path": "github.com/codegangsta/envy/lib",
 			"revision": "4b78388c8ce4fa412440ca4eaa654e2fdd752e49",
@@ -87,6 +93,12 @@
 			"path": "github.com/jinzhu/gorm",
 			"revision": "0807818e92c8727d6a2c6868917715e28ef9a3d3",
 			"revisionTime": "2019-05-05T06:52:47Z"
+		},
+		{
+			"checksumSHA1": "eECxSkwh0WmhLwaxHfkvcLOWS08=",
+			"path": "github.com/jinzhu/gorm/dialects/mysql",
+			"revision": "5c0f6716ad1e3a6b6a8afa56afeff747032a6926",
+			"revisionTime": "2019-05-05T09:29:28Z"
 		},
 		{
 			"checksumSHA1": "4eelJOSLZoDzLuaJvgilOBVNovU=",
