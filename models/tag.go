@@ -60,3 +60,9 @@ func UpdateTag(id int,params interface{}) bool  {
 	db.Model(&Tag{}).Where("id = ?",id).Updates(params)
 	return  true
 }
+
+// 删除标签
+func DeleteTag(id int) bool {
+	db.Where("id = ?",id).Delete(&Tag{})
+	return true
+}

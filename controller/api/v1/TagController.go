@@ -42,39 +42,37 @@ func AddTag(c *gin.Context) {
 	var code int
 	var msg string
 
-
 	name := c.PostForm("name")
-	state := com.StrTo(c.DefaultPostForm("state","0")).MustInt()
+	state := com.StrTo(c.DefaultPostForm("state", "0")).MustInt()
 	createdBy := c.PostForm("created_by")
 
 	valid := validation.Validation{}
 	valid.Required(name, "name").Message("名称不能为空")
-	valid.MaxSize(name,100,"name").Message("名称最长为100字符")
-	valid.Required(createdBy,"created_by").Message("创建人不能为空")
-	valid.MaxSize(createdBy,100,"created_by").Message("创建人最长为100个字符")
-	valid.Range(state,0,1,"state").Message("状态值错误")
+	valid.MaxSize(name, 100, "name").Message("名称最长为100字符")
+	valid.Required(createdBy, "created_by").Message("创建人不能为空")
+	valid.MaxSize(createdBy, 100, "created_by").Message("创建人最长为100个字符")
+	valid.Range(state, 0, 1, "state").Message("状态值错误")
 
-
-	if !valid.HasErrors(){
+	if !valid.HasErrors() {
 		if !models.ExistTagByName(name) {
 			code = e.SUCCESS
-			res  := models.AddTag(name,state,createdBy)
+			res := models.AddTag(name, state, createdBy)
 			if !res {
 				code = e.ERROR
 			}
-		}else {
+		} else {
 			code = e.EXIST
 		}
 
 		msg = e.GetMsg(code)
-	}else {
+	} else {
 		msg = com.ToStr(valid.Errors)
 	}
 
-	c.JSON(http.StatusOK,gin.H{
-		"code":code,
-		"msg":msg,
-		"data":make(map[string]string),
+	c.JSON(http.StatusOK, gin.H{
+		"code": code,
+		"msg":  msg,
+		"data": make(map[string]string),
 	})
 
 }
@@ -90,30 +88,63 @@ func UpdateTag(c *gin.Context) {
 
 	// 表单验证
 	valid := validation.Validation{}
-	valid.Required(id,"id").Message("ID不能为空")
-	valid.Required(name,"name").Message("名称不能为空")
-	valid.MaxSize(name,100,"name").Message("名称最长为100字符")
-	valid.Required(modifiedBy,"modified_by").Message("修改人不能为空")
-	valid.MaxSize(modifiedBy,100,"modified_by").Message("修改人最长为100个字符")
-	valid.Range(state,0,1,"state").Message("状态值错误")
+	valid.Required(id, "id").Message("ID不能为空")
+	valid.Required(name, "name").Message("名称不能为空")
+	valid.MaxSize(name, 100, "name").Message("名称最长为100字符")
+	valid.Required(modifiedBy, "modified_by").Message("修改人不能为空")
+	valid.MaxSize(modifiedBy, 100, "modified_by").Message("修改人最长为100个字符")
+	valid.Range(state, 0, 1, "state").Message("状态值错误")
 
 	if valid.HasErrors() {
 		code = e.INVALID_PARAMS
 		msg = com.ToStr(valid.Errors)
-	}else {
+	} else {
 		// 更新数据
 		if models.ExistTagById(id) {
 			params := make(map[string]interface{})
 			params["modified_by"] = modifiedBy
-			if name !="" {
+			if name != "" {
 				params["name"] = name
 			}
 			params["state"] = state
-			models.UpdateTag(id,params)
+			models.UpdateTag(id, params)
 			code = e.SUCCESS
 			msg = e.GetMsg(code)
+		} else {
+			code = e.NOT_EXIST
+		}
+		msg = e.GetMsg(code)
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"code": code,
+		"msg":  msg,
+		"data": make(map[string]string),
+	})
+}
+
+func DeleteTag(c *gin.Context) {
+
+	var code int
+	var msg string
+
+
+	id := com.StrTo(c.Param("id")).MustInt()
+
+	valid := validation.Validation{}
+	valid.Required(id, "id").Message("id不能为空")
+
+	if valid.HasErrors() {
+		code = e.INVALID_PARAMS
+		msg = com.ToStr(valid.Errors)
+	} else {
+
+		if models.ExistTagById(id) {
+			models.DeleteTag(id)
+			code = e.SUCCESS
 		}else {
 			code = e.NOT_EXIST
+
 		}
 		msg = e.GetMsg(code)
 	}
@@ -123,8 +154,4 @@ func UpdateTag(c *gin.Context) {
 		"msg":msg,
 		"data":make(map[string]string),
 	})
-}
-
-func DeleteTag(c *gin.Context) {
-
 }
