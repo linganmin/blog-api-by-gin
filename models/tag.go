@@ -44,3 +44,19 @@ func ExistTagByName(name string) bool {
 
 	return false
 }
+
+// 通过id判断是否已存在
+func ExistTagById(id int) bool {
+	var tag Tag
+	db.Select("id").Where("id = ? ",id).First(&tag)
+	if tag.ID > 0 {
+		return true
+	}
+	return  false
+}
+
+// 更新标签
+func UpdateTag(id int,params interface{}) bool  {
+	db.Model(&Tag{}).Where("id = ?",id).Updates(params)
+	return  true
+}

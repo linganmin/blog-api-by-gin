@@ -5,6 +5,7 @@ var MsgFlags = map[int]string{
 	ERROR:          "服务器错误",
 	INVALID_PARAMS: "参数错误",
 	EXIST:          "该记录已存在",
+	NOT_EXIST:      "该记录不存在",
 }
 
 func GetMsg(code int) string {

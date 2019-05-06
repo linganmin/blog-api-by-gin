@@ -80,7 +80,52 @@ func AddTag(c *gin.Context) {
 }
 
 func UpdateTag(c *gin.Context) {
+	var code int
+	var msg string
 
+	id := com.StrTo(c.Param("id")).MustInt()
+	name := c.PostForm("name")
+	state := com.StrTo(c.PostForm("state")).MustInt()
+	modifiedBy := c.PostForm("modified_by")
+
+	// 表单验证
+	valid := validation.Validation{}
+	valid.Required(id,"id").Message("ID不能为空")
+	valid.Required(name,"name").Message("名称不能为空")
+	valid.MaxSize(name,100,"name").Message("名称最长为100字符")
+	valid.Required(modifiedBy,"modified_by").Message("修改人不能为空")
+	valid.MaxSize(modifiedBy,100,"modified_by").Message("修改人最长为100个字符")
+	valid.Range(state,0,1,"state").Message("状态值错误")
+
+	if valid.HasErrors() {
+		code = e.INVALID_PARAMS
+		msg = com.ToStr(valid.Errors)
+	}else {
+		// 更新数据
+		if models.ExistTagById(id) {
+			params := make(map[string]interface{})
+			params["modified_by"] = modifiedBy
+			if name !="" {
+				params["name"] = name
+			}
+			params["state"] = state
+			models.UpdateTag(id,params)
+			code = e.SUCCESS
+			msg = e.GetMsg(code)
+		}else {
+			code = e.NOT_EXIST
+		}
+		msg = e.GetMsg(code)
+	}
+
+
+
+
+	c.JSON(http.StatusOK,gin.H{
+		"code":code,
+		"msg":msg,
+		"data":make(map[string]string),
+	})
 }
 
 func DeleteTag(c *gin.Context) {
