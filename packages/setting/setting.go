@@ -15,7 +15,6 @@ var (
 	ReadTimeout  time.Duration
 	WriteTimeout time.Duration
 
-	PageSize  int
 	JwtSecret string
 )
 
@@ -53,5 +52,4 @@ func loadApp() {
 		log.Fatalf("加载配置文件的 app 配置项失败：%v", err)
 	}
 	JwtSecret = sec.Key("JWT_SECRET").MustString("123456")
-	PageSize = sec.Key("PAGE_SIZE").MustInt(20)
 }

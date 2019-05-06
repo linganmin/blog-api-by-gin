@@ -3,7 +3,6 @@ package v1
 import (
 	"ginhello/models"
 	"ginhello/packages/e"
-	"ginhello/packages/setting"
 	"ginhello/packages/util"
 	"github.com/Unknwon/com"
 	"github.com/astaxie/beego/validation"
@@ -29,7 +28,7 @@ func Tags(c *gin.Context) {
 	}
 	code := e.SUCCESS
 
-	data["lists"] = models.GetTags(util.GetPage(c), setting.PageSize, maps)
+	data["lists"] = models.GetTags(util.GetPage(c), util.GetPageSize(c), maps)
 	data["total"] = models.GetTagTotal(maps)
 
 	c.JSON(http.StatusOK, gin.H{
