@@ -118,9 +118,6 @@ func UpdateTag(c *gin.Context) {
 		msg = e.GetMsg(code)
 	}
 
-
-
-
 	c.JSON(http.StatusOK,gin.H{
 		"code":code,
 		"msg":msg,
