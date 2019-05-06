@@ -1,4 +1,6 @@
-# 学习Golang的Gin框架的Demo
+# 学习Golang的Gin框架
+
+一个上手Gin的Blog Api的学习项目
 
 > 因为`PHP`出身，所以在学习`Gin`框架的时候，尽可能的在往`MVC`方向靠，所以在本项目中，你会看到`controller`请不要奇怪
 
