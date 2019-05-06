@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"ginhello/controller/admin"
+	"blog-api-by-gin/controller/admin"
 	"github.com/gin-gonic/gin"
 )
 

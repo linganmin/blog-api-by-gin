@@ -1,9 +1,9 @@
 package v1
 
 import (
-	"ginhello/models"
-	"ginhello/packages/e"
-	"ginhello/packages/util"
+	"blog-api-by-gin/models"
+	"blog-api-by-gin/packages/e"
+	"blog-api-by-gin/packages/util"
 	"github.com/Unknwon/com"
 	"github.com/astaxie/beego/validation"
 	"github.com/gin-gonic/gin"

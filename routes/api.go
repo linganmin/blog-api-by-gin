@@ -1,8 +1,8 @@
 package routes
 
 import (
-	"ginhello/controller/api"
-	v1 "ginhello/controller/api/v1"
+	"blog-api-by-gin/controller/api"
+	v1 "blog-api-by-gin/controller/api/v1"
 	"github.com/gin-gonic/gin"
 )
 

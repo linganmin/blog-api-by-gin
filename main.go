@@ -1,7 +1,7 @@
 package main
 
 import (
-	"ginhello/routes"
+	"blog-api-by-gin/routes"
 )
 func main() {
 	routes.Init()

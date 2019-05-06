@@ -6,7 +6,7 @@
 
 - Clone this project
     ```bash
-    $ git clone  git@github.com:linganmin/learn-gin.git
+    $ git clone  git@github.com:linganmin/blog-api-by-gin.git
     ```
 
 - Install `kardianos/govendor`
@@ -23,7 +23,7 @@
 
 ```bash
 
-cd learn-gin
+cd blog-api-by-gin
 
 # 使用热加载启动
 gin run main.go
