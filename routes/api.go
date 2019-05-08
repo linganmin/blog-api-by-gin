@@ -15,4 +15,10 @@ func RegisterApiRoute(group *gin.RouterGroup) {
 	apiv1.POST("/tags",v1.AddTag)
 	apiv1.PUT("/tags/:id",v1.UpdateTag)
 	apiv1.DELETE("/tags/:id",v1.DeleteTag)
+
+	//
+	//apiv1.GET("/tags",v1.Tags)
+	//apiv1.POST("/tags",v1.AddTag)
+	//apiv1.PUT("/tags/:id",v1.UpdateTag)
+	//apiv1.DELETE("/tags/:id",v1.DeleteTag)
 }
