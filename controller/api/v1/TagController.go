@@ -28,7 +28,7 @@ func Tags(c *gin.Context) {
 	}
 	code := e.SUCCESS
 
-	data["lists"] = models.GetTags(util.GetPage(c), util.GetPageSize(c), maps)
+	data["lists"] = models.GetTags(util.GetPageOffset(c), util.GetPageSize(c), maps)
 	data["total"] = models.GetTagTotal(maps)
 
 	c.JSON(http.StatusOK, gin.H{
@@ -66,6 +66,7 @@ func AddTag(c *gin.Context) {
 
 		msg = e.GetMsg(code)
 	} else {
+		code = e.INVALID_PARAMS
 		msg = com.ToStr(valid.Errors)
 	}
 

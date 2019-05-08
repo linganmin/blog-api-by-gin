@@ -5,7 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func GetPage(c *gin.Context) int {
+func GetPageOffset(c *gin.Context) int {
 	result := 0
 
 	page := com.StrTo(c.DefaultQuery("page", "0")).MustInt()

@@ -16,9 +16,9 @@ func RegisterApiRoute(group *gin.RouterGroup) {
 	apiv1.PUT("/tags/:id",v1.UpdateTag)
 	apiv1.DELETE("/tags/:id",v1.DeleteTag)
 
-	//
-	//apiv1.GET("/tags",v1.Tags)
-	//apiv1.POST("/tags",v1.AddTag)
+	// articles
+	apiv1.GET("/articles",v1.Articles)
+	apiv1.POST("/articles",v1.AddArticle)
 	//apiv1.PUT("/tags/:id",v1.UpdateTag)
 	//apiv1.DELETE("/tags/:id",v1.DeleteTag)
 }
