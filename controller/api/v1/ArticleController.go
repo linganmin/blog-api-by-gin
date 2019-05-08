@@ -17,6 +17,7 @@ func Articles(c *gin.Context) {
 	code := e.SUCCESS
 
 	title := c.Query("title")
+
 	tagId := com.StrTo(c.Query("tag_id")).MustInt()
 	if param := c.Query("status"); param != "" {
 		status := com.StrTo(param).MustInt()
@@ -28,7 +29,6 @@ func Articles(c *gin.Context) {
 	if tagId > 0 {
 		maps["tag_id"] = tagId
 	}
-
 	data["list"] = models.GetArticles(util.GetPageOffset(c), util.GetPageSize(c), maps)
 	data["total"] = models.GetArticlesTotal(maps)
 

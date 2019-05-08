@@ -2,8 +2,11 @@ package models
 
 type Articles struct {
 	Model
+
+	Tag Tags `json:"tag"`
+	TagId int `json:"tag_id" gorm:"index"`
+
 	Title string `json:"title"`
-	TagId int `json:"tag_id"`
 	Status int `json:"status"`
 	Desc string `json:"desc"`
 	Content string `json:"content"`
@@ -12,7 +15,7 @@ type Articles struct {
 }
 
 func GetArticles(pageOffset int,pageSize int,maps interface{})(articles []Articles)  {
-	db.Where(maps).Offset(pageOffset).Limit(pageSize).Find(&articles)
+	db.Preload("Tag").Where(maps).Offset(pageOffset).Limit(pageSize).Find(&articles)
 	return
 }
 
